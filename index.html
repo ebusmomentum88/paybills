@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PayMoment - Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- TOP HEADER -->
+  <header class="header">
+    <div class="header-left">
+      <img id="profilePic" class="avatar" src="https://i.pravatar.cc/80" alt="profile" />
+      <div>
+        <div class="muted small">Hi,</div>
+        <div id="username" class="bold"></div>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <button class="icon small" id="helpBtn">HELP</button>
+      <button class="icon small" id="qrBtn">QR</button>
+      <button class="icon small notif" id="notifBtn">🔔 <span id="notifCount" class="notif-badge" style="display:none">0</span></button>
+      <button id="logout" class="btn-ghost">Logout</button>
+    </div>
+  </header>
+
+  <!-- BALANCE CARD -->
+  <section class="card balance-card">
+    <div>
+      <div class="muted">Available Balance</div>
+      <div class="balance-row">
+        <div id="balanceDisplay" class="balance">₦0.00</div>
+        <button id="toggleBalance" class="btn-icon">👁️</button>
+      </div>
+      <div class="muted small" id="miniText"></div>
+    </div>
+
+    <div class="balance-actions">
+      <a href="#" id="historyLink" class="muted">Transaction History &gt;</a>
+      <button id="addMoney" class="btn-white">+ Add Money</button>
+    </div>
+  </section>
+
+  <!-- BUSINESS BANNER -->
+  <section class="card banner">
+    <div>🏬 Business Service - Today's Sales: <strong id="todaySales">₦0.00</strong></div>
+    <div class="muted">›</div>
+  </section>
+
+  <!-- QUICK ACTIONS -->
+  <section class="quick">
+    <button class="quick-btn" data-action="to-opay">👤 To OPay</button>
+    <button class="quick-btn" data-action="to-bank">🏦 To Bank</button>
+    <button class="quick-btn" data-action="withdraw">⬇ Withdraw</button>
+  </section>
+
+  <!-- SERVICES GRID -->
+  <section class="services-grid">
+    <button class="svc" data-service="Airtime">📶<span>Airtime</span></button>
+    <button class="svc" data-service="Data">📡<span>Data</span></button>
+    <button class="svc" data-service="Electricity">💡<span>Electricity</span></button>
+    <button class="svc" data-service="TV">📺<span>TV</span></button>
+    <button class="svc" data-service="Flight">✈️<span>Flight</span></button>
+  </section>
+
+  <!-- RECENT TRANSACTIONS -->
+  <section class="card tx-card">
+    <div class="row between">
+      <h3>Recent Transactions</h3>
+      <a href="#" id="viewAll" class="muted">View all</a>
+    </div>
+    <ul id="recentTx" class="tx-list"></ul>
+  </section>
+
+  <!-- MODALS (hidden by default) -->
+  <!-- Deposit Modal -->
+  <div id="modalDeposit" class="modal" aria-hidden="true">
+    <div class="modal-card">
+      <h3>Deposit to Wallet</h3>
+      <input id="depositAmt" type="number" placeholder="Amount (₦)" />
+      <div class="modal-actions">
+        <button class="btn-ghost" data-close>Cancel</button>
+        <button id="depositProceed" class="btn-primary">Proceed</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Generic Service Modal (Airtime/Data/Electricity/TV/Flight/Transfer/Bank/Withdraw) -->
+  <div id="modalService" class="modal" aria-hidden="true">
+    <div class="modal-card">
+      <h3 id="svcTitle">Service</h3>
+      <div id="svcBody"></div>
+      <div class="modal-actions">
+        <button class="btn-ghost" data-close>Cancel</button>
+        <button id="svcSubmit" class="btn-primary">Pay</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Transaction History Modal -->
+  <div id="modalHistory" class="modal" aria-hidden="true">
+    <div class="modal-card large">
+      <h3>Transactions</h3>
+      <div id="historyList"></div>
+      <div class="modal-actions">
+        <button class="btn-ghost" data-close>Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

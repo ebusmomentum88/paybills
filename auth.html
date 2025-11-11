@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PayMoment - Sign in / Sign up</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="auth-page">
+    <div class="auth-card">
+      <h1 id="authTitle">Welcome back</h1>
+
+      <div class="auth-fields">
+        <input id="name" placeholder="Full Name (for signup)" style="display:none;" />
+        <input id="email" type="email" placeholder="Email" />
+        <input id="password" type="password" placeholder="Password" />
+      </div>
+
+      <div class="auth-actions">
+        <button id="authBtn" class="btn-primary">Login</button>
+        <button id="switchBtn" class="btn-link">Don't have an account? Sign up</button>
+      </div>
+
+      <p class="small muted">By continuing you agree to PayMoment terms.</p>
+    </div>
+  </main>
+
+  <script>
+  (function(){
+    const API = "https://paymomentbackend.onrender.com/api";
+    let isLogin = true;
+
+    const authTitle = document.getElementById('authTitle');
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const authBtn = document.getElementById('authBtn');
+    const switchBtn = document.getElementById('switchBtn');
+
+    function toggleMode(){
+      isLogin = !isLogin;
+      if(isLogin){
+        authTitle.textContent = 'Welcome back';
+        authBtn.textContent = 'Login';
+        switchBtn.textContent = "Don't have an account? Sign up";
+        nameInput.style.display = 'none';
+      } else {
+        authTitle.textContent = 'Create account';
+        authBtn.textContent = 'Sign up';
+        switchBtn.textContent = 'Already have an account? Login';
+        nameInput.style.display = 'block';
+      }
+    }
+
+    switchBtn.addEventListener('click', (e) => { e.preventDefault(); toggleMode(); });
+
+    authBtn.addEventListener('click', async () => {
+      const email = emailInput.value.trim();
+      const password = passwordInput.value.trim();
+      const name = nameInput.value.trim();
+      if(!email || !password || (!isLogin && !name)) return alert('Please fill all fields');
+
+      const endpoint = isLogin ? '/auth/login' : '/auth/signup';
+      try{
+        const res = await fetch(API + endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(isLogin ? { email, password } : { name, email, password })
+        });
+        const data = await res.json();
+        if(!data) return alert('No response from server');
+        if(data.success && data.token){
+          // persist user info for dashboard
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('email', data.user?.email || email);
+          localStorage.setItem('name', data.user?.name || name || data.user?.email || email);
+          // redirect to dashboard
+          window.location.href = 'index.html';
+        } else {
+          alert(data.message || data.error || 'Authentication failed');
+        }
+      }catch(err){
+        console.error(err);
+        alert('Network or server error');
+      }
+    });
+
+    // auto-redirect if already logged in
+    if(localStorage.getItem('token')) window.location.href = 'index.html';
+  })();
+  </script>
+</body>
+</html>
